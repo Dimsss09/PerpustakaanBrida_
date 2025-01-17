@@ -65,6 +65,23 @@ $categories_result = $conn->query($categories_query);
 
         .form-inline .row {
             width: 100%;
+            margin-left: -0px; /* Adjust this value to shift the columns to the left */
+        }
+
+        .form-inline .col-lg-6,
+        .form-inline .col-lg-3 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .form-inline .col-lg-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+
+        .form-inline .col-lg-3 {
+            flex: 0 0 auto;
+            width: 25%;
         }
     </style>
 </head>
@@ -86,9 +103,9 @@ $categories_result = $conn->query($categories_query);
             Daftar Penelitian
         </div>
         <div class="card-body">
-            <form method="POST" action="" class="form-inline">
+            <form method="POST" action="" class="form-inline" id="searchForm">
                 <div class="row g-3">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         <input class="form-control w-100" type="text" id="search" name="search" 
                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
                     </div>
@@ -168,6 +185,12 @@ $(document).ready(function() {
     }
 
     $('#search, #year, #category').on('input', function() {
+        fetchData();
+    });
+
+    // Prevent form submission on Enter key press
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault();
         fetchData();
     });
 

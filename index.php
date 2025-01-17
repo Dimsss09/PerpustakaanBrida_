@@ -52,6 +52,44 @@ $categories_result = $conn->query($categories_query);
         .form-inline .btn {
             width: 100%;
         }
+
+        .form-inline .row {
+            width: 100%;
+            margin-left: -0px; /* Adjust this value to shift the columns to the left */
+        }
+
+        .form-inline .col-lg-6,
+        .form-inline .col-lg-3 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .form-inline .col-lg-6 {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+
+        .form-inline .col-lg-3 {
+            flex: 0 0 auto;
+            width: 25%;
+        }
+    
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Kiri dan kanan */
+            align-items: center; /* Vertikal sejajar */
+        }
+
+        .navbar-left {
+            display: flex;
+            gap: 10px; /* Jarak antar ikon di kiri */
+        }
+
+        .navbar-right {
+            display: flex;
+            gap: 10px; /* Jarak antar ikon di kanan */
+            margin-left: auto; /* Geser ke kanan */
+        }
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -60,21 +98,20 @@ $categories_result = $conn->query($categories_query);
         <a class="navbar-brand ps-3" >SIAP BRIDA</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        </form>
         <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
+        <div class="navbar-right ms-auto">
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -159,9 +196,9 @@ $categories_result = $conn->query($categories_query);
                             Daftar Penelitian
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="" class="form-inline">
+                            <form method="POST" action="" class="form-inline" id="searchForm">
                                 <div class="row g-3">
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
                                         <input class="form-control w-100" type="text" id="search" name="search" 
                                             placeholder="Cari Judul/Nama Penulis" aria-label="Cari Judul/Nama Penulis" />
                                     </div>
@@ -198,6 +235,7 @@ $categories_result = $conn->query($categories_query);
                                         <th>Kategori</th>
                                         <th>Lokasi</th>
                                         <th>Tanggal Masuk</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="results">
@@ -245,6 +283,12 @@ $categories_result = $conn->query($categories_query);
         }
 
         $('#search, #year, #category').on('input', function() {
+            fetchData();
+        });
+
+        // Prevent form submission on Enter key press
+        $('#searchForm').on('submit', function(e) {
+            e.preventDefault();
             fetchData();
         });
 
