@@ -27,8 +27,8 @@
 
     <!-- Hero Section dengan Gambar -->
     <div class="container-fluid p-0">
-        <div class="position-relative">
-            <img src="assets\img\6.jpg" alt="Perpustakaan BRIDA" class="w-100" style="object-fit: cover; height: 400px;">
+        <div class="position-relative" style="margin-top: 50px;">
+            <img src="assets\img\6.jpg" alt="Perpustakaan BRIDA" class="w-100" style="object-fit: cover; height: 585px;" >
             <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
                 <h1 class="display-4 fw-bold" style="color: black; background-color: rgba(255, 255, 255, 0.7); padding: 10px; border-radius: 5px;">Perpustakaan BRIDA</h1>
                 <p class="lead" style="color: black; background-color: rgba(255, 255, 255, 0.7); padding: 5px; border-radius: 5px;">Pusat Penelitian dan Pengetahuan</p>
@@ -37,7 +37,6 @@
                 </a>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Profil Singkat -->
